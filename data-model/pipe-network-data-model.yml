@@ -1,0 +1,41 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  https://github.com/PipeNetwork/docs/blob/main/docs/cdn-api/api-documentation.md ;
+  https://github.com/PipeNetwork/lib-storage
+summary: >-
+  Entity graph derived from the Pipe CDN/Storage API request/response shapes and
+  SDK surface. The core objects are the User/Account (Solana-wallet backed), the
+  application key, and the content-addressed Object.
+entities:
+- name: User
+  aka: Account
+  identifiers: [user_id, solana_pubkey, account]
+  fields: [user_id, user_app_key, solana_pubkey]
+  created_by: POST /createUser
+  relationships:
+  - has_many: AppKey (via user_app_key; rotated by /rotateAppKey)
+  - has_many: Object (via user_id)
+  - has_one: CreditsBalance (via user_id)
+- name: AppKey
+  identifiers: [user_app_key]
+  belongs_to: User
+  note: rotated via /rotateAppKey (new_user_app_key)
+- name: Object
+  aka: File
+  identifiers: [file_name, blake3_hash, operation_id, deterministic_url]
+  addressing: Blake3 content hash
+  deterministic_url: 'https://{node}/{account}/{hash}'
+  belongs_to: User
+  created_by: POST /upload | store()
+  relationships:
+  - belongs_to: User (via user_id/account)
+- name: CreditsBalance
+  identifiers: [user_id]
+  fields: [balance_usdc, tier_quotas]
+  belongs_to: User
+  funded_by: 'topup intent -> Solana Pay -> credits-submit'
+- name: JWTSession
+  identifiers: [access_token, refresh_token]
+  belongs_to: User
+  created_by: POST /auth/verify (SIWS)

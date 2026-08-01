@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/PipeNetwork/pipe/blob/main/README.md
+summary: >-
+  Pipe Network reached a production mainnet release of its storage network on
+  Solana. The earlier CDN API was documented against a Solana Devnet deployment.
+  No formal deprecation policy, Sunset/Deprecation (RFC 8594) headers, SLA, or
+  hosted status page were found published as of this pass.
+stages:
+  current: mainnet (production)
+  prior: 'CDN Devnet (Solana Devnet) deployment'
+network: Solana
+deprecations:
+- what: referral system
+  status: removed at mainnet release
+- what: SOL withdrawal commands
+  status: removed at mainnet release
+- what: token withdrawal commands
+  status: removed at mainnet release
+- what: check-sol command
+  status: removed at mainnet release
+- what: legacy download endpoint
+  status: deprecated but retained behind --legacy flag
+deprecation_policy:
+  published: false
+  headers_observed: false
+sla:
+  published: false
+status_page:
+  published: false
+pricing:
+  model: prepaid USDC credits
+  baseline: '$25/TB ($0.025/GB Normal); tier multipliers up to 25x'

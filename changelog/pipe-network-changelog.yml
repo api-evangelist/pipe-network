@@ -1,0 +1,38 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/PipeNetwork/pipe/blob/main/README.md
+scheme: semver-ish (pipe-cli release notes)
+current: mainnet
+note: >-
+  Pipe publishes release notes in the pipe-cli README "Recent Updates" section
+  rather than a dated changelog. Dates are not published per entry; ordering is
+  as documented.
+entries:
+- version: mainnet-release
+  label: Mainnet Release (Latest)
+  breaking: true
+  highlights:
+  - 'BREAKING: removed testnet-only features for mainnet deployment'
+  - 'Removed referral system, SOL withdrawal, token withdrawal, check-sol'
+  - 'Added prepaid credits system (USDC): credits-status, topup, estimate-cost'
+  - 'Changed to USD-based pricing ($25/TB = $0.025/GB baseline)'
+  - Credits use real USDC on production mainnet
+- version: 0.3.x
+  breaking: false
+  highlights:
+  - Directory sync with .pipe-sync metadata tracking
+  - Incremental sync (only changed files)
+  - Blake3 hash-based change detection
+  - Conflict detection + resolution strategies
+- version: 0.2.x
+  breaking: false
+  highlights:
+  - High-performance streaming downloads (no base64 overhead)
+  - Direct streaming storage-to-disk (lower memory)
+  - '--legacy flag for backward compatibility with old download endpoint'
+- version: 0.1.x
+  breaking: false
+  highlights:
+  - Quantum-resistant key generation + digital signatures (Kyber-1024, Dilithium5)
+  - Multiple account support via --config
+  - Automatic base64 decoding on downloads

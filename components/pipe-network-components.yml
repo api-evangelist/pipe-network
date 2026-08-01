@@ -1,0 +1,45 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/PipeNetwork/lib-storage/blob/main/INTEGRATIONS.md
+summary: >-
+  Pipe ships native agent-framework tool adapters inside the storage SDKs — not
+  UI widgets, but prebuilt tool definitions/dispatchers that expose the Pipe
+  store/fetch/pin/delete surface to LLM agent frameworks. Grouped by framework
+  family with the loader/factory functions per language.
+families:
+- family: OpenAI tools
+  loaders:
+    typescript: [createOpenAIPipeTools, runOpenAIPipeTool]
+    python: [openai_pipe_tools, run_openai_pipe_tool]
+    rust: [create_openai_pipe_tools, run_openai_pipe_tool]
+- family: Anthropic tools
+  loaders:
+    typescript: [createAnthropicPipeTools, runAnthropicPipeTool]
+    python: [anthropic_pipe_tools, run_anthropic_pipe_tool]
+    rust: [create_anthropic_pipe_tools, run_anthropic_pipe_tool]
+- family: LangChain-style tools
+  loaders:
+    typescript: [PipeStorageLangChainTool]
+    python: [PipeStorageLangChainTool]
+    rust: [PipeStorageLangChainTool]
+- family: LlamaIndex-style tools
+  loaders:
+    typescript: [createLlamaIndexPipeTools]
+    python: [llamaindex_pipe_tools]
+    rust: [create_llamaindex_pipe_tools]
+- family: Vercel AI SDK tools
+  loaders:
+    typescript: [createVercelPipeTools]
+- family: Cloudflare AI Workflows tools
+  loaders:
+    typescript: [createCloudflarePipeTools, runCloudflarePipeTool]
+- family: AutoGen tools
+  loaders:
+    python: [autogen_pipe_tool_schemas, autogen_pipe_function_map]
+- family: CrewAI tools
+  loaders:
+    python: [CrewAIPipeTool, crewai_pipe_tools]
+mapped_adapters:
+- Replit agents (use OpenAI/Anthropic adapters)
+- Cursor background agents (use OpenAI/Anthropic adapters)
+- On-chain agent frameworks (use deterministic URL from pin()/deterministic_url())

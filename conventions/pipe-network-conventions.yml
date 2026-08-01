@@ -1,0 +1,49 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/PipeNetwork/lib-storage
+docs: https://github.com/PipeNetwork/docs/blob/main/docs/cdn-api/api-documentation.md
+summary: >-
+  Cross-cutting semantics for the Pipe Storage / Firestarter API and its SDKs.
+auth:
+  style: SIWS (Sign In With Solana) -> JWT bearer; or user_app_key query param
+  see: authentication/pipe-network-authentication.yml
+content_addressing:
+  algorithm: Blake3
+  id: every object gets a Blake3 content hash (content-based addressing)
+  deterministic_url:
+    format: 'https://{node}/{account}/{hash}'
+    example_host: us-west-01-firestarter.pipenetwork.com
+    resolver: 'pin(key) / deterministic_url() resolves any key to a public URL'
+sdk_surface:
+  auth: [auth_challenge, auth_verify, auth_refresh, auth_logout]
+  storage: [store, fetch, pin, delete]
+  identity: [/user/me]
+key_types_accepted_by_fetch:
+- file name
+- content hash
+- operation id
+- deterministic URL
+token_refresh:
+  behavior: >-
+    On HTTP 401 with a refresh token present, SDKs auto-refresh the JWT and
+    retry once (Python/TypeScript transparent; Rust via should_refresh()).
+idempotency:
+  supported: false
+  note: >-
+    No documented idempotency-key mechanism. De-duplication is instead achieved
+    through content addressing — re-storing identical bytes yields the same
+    Blake3 hash and deterministic URL, and directory sync uses Blake3 change
+    detection + --skip-uploaded to avoid re-uploading unchanged files.
+encryption:
+  client_side:
+  - AES-256-GCM (password-derived key)
+  - 'Post-quantum: Kyber-1024 (ML-KEM) + Dilithium5 (ML-DSA)'
+storage_tiers:
+  values: [Normal, Priority, Premium, Ultra, Enterprise]
+  pricing_baseline: '$25/TB == $0.025 USDC/GB (Normal); multipliers 1x/2.5x/5x/10x/25x'
+  billing: prepaid USDC credits, funded via Solana Pay
+versioning:
+  network: Solana mainnet (Firestarter); earlier CDN API documented on Solana Devnet
+  see: lifecycle/pipe-network-lifecycle.yml
+errors:
+  see: errors/pipe-network-problem-types.yml

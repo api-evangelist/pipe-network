@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  https://github.com/PipeNetwork/lib-storage ;
+  https://github.com/PipeNetwork/docs/blob/main/docs/cdn-api/api-documentation.md
+summary: >-
+  Conformance assertions derived from Pipe's published SDK/CLI/docs surface.
+  Absence is honest data, not fabrication.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: Auth is SIWS (wallet signature -> JWT) or user_app_key; no OAuth 2.0 flows documented.
+- id: oidc
+  conforms: false
+  evidence: No OpenID Connect / discovery document; /.well-known/openid-configuration returns SPA HTML, not a config.
+- id: rfc9457
+  conforms: false
+  evidence: No application/problem+json error envelope documented; errors are ad hoc.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency-key mechanism; de-dup is via Blake3 content addressing + sync change detection.
+- id: x402
+  conforms: true
+  evidence: SDKs ship x402 agent-payment support for machine-to-machine settlement.
+- id: siws
+  conforms: true
+  evidence: Sign In With Solana challenge/verify/refresh/logout flow implemented across all SDKs.
+- id: blake3-content-addressing
+  conforms: true
+  evidence: Every object addressed by Blake3 hash; deterministic URL /{account}/{hash}.
+- id: post-quantum-encryption
+  conforms: true
+  evidence: Client-side Kyber-1024 (ML-KEM) + Dilithium5 (ML-DSA) supported by pipe-cli.

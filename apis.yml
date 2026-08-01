@@ -1,8 +1,15 @@
 aid: pipe-network
 name: Pipe Network
-description: 'Pipe Network is a company surfaced as a portfolio company of multicoin-capital and added
-  to the API Evangelist network as a stub for enrichment. Sector: crypto-web3. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  Pipe Network is a decentralized storage and content-delivery network built on
+  Solana, marketed as "Firestarter" storage. It offers content-addressed
+  (Blake3) object storage with client-side AES-256-GCM and post-quantum
+  (Kyber-1024 / Dilithium5) encryption, deterministic public URLs of the form
+  /{account}/{hash}, prepaid-USDC billing funded via Solana Pay, and first-party
+  TypeScript / Python / Rust SDKs plus a Rust CLI. The SDKs ship native agent-
+  framework tool adapters (OpenAI, Anthropic, LangChain, LlamaIndex, Vercel AI
+  SDK, Cloudflare AI Workflows, AutoGen, CrewAI) and x402 machine-to-machine
+  payment support. Backed by Multicoin Capital.
 url: https://raw.githubusercontent.com/api-evangelist/pipe-network/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,13 +17,60 @@ x-backed-by:
 - multicoin-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://github.com/PipeNetwork.png
 tags:
 - Company
 - Crypto Web3
-apis: []
+- Storage
+- Decentralized Storage
+- Content Delivery Network
+- Solana
+- Encryption
+- AI Agents
+- Web3
+apis:
+- name: Pipe Storage (Firestarter) API
+  description: >-
+    Content-addressed decentralized object storage on Solana. Create users,
+    upload/download files, resolve deterministic public URLs, and manage prepaid
+    USDC credits. Auth is SIWS (Sign In With Solana -> JWT) or a provisioned
+    user_app_key.
+  humanURL: https://github.com/PipeNetwork/docs/blob/main/docs/cdn-api/api-documentation.md
+  baseURL: https://us-west-01-firestarter.pipenetwork.com
+  tags:
+  - Storage
+  - Decentralized Storage
+  - Solana
+  properties:
+  - type: APIReference
+    url: https://github.com/PipeNetwork/docs/blob/main/docs/cdn-api/api-documentation.md
+  - type: Authentication
+    url: authentication/pipe-network-authentication.yml
+  - type: Conventions
+    url: conventions/pipe-network-conventions.yml
+  - type: ErrorCatalog
+    url: errors/pipe-network-problem-types.yml
+  - type: DataModel
+    url: data-model/pipe-network-data-model.yml
+  - type: Conformance
+    url: conformance/pipe-network-conformance.yml
+  - type: MCPServer
+    url: mcp/pipe-network-mcp.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +79,48 @@ maintainers:
 common:
 - type: Website
   url: https://pipe.network
+- type: GitHubOrganization
+  url: https://github.com/PipeNetwork
+- type: Documentation
+  url: https://github.com/PipeNetwork/docs
+- type: APIReference
+  url: https://github.com/PipeNetwork/docs/blob/main/docs/cdn-api/api-documentation.md
+- type: SourceCode
+  url: https://github.com/PipeNetwork/lib-storage
+- type: X
+  url: https://x.com/pipenetwork
+- type: Packages
+  url: packages/pipe-network-packages.yml
+- type: SDKs
+  url: packages/pipe-network-packages.yml
+- type: CLI
+  url: cli/pipe-network-cli.yml
+- type: Authentication
+  url: authentication/pipe-network-authentication.yml
+- type: Conventions
+  url: conventions/pipe-network-conventions.yml
+- type: ChangeLog
+  url: changelog/pipe-network-changelog.yml
+- type: Lifecycle
+  url: lifecycle/pipe-network-lifecycle.yml
+- type: Components
+  url: components/pipe-network-components.yml
+- type: Conformance
+  url: conformance/pipe-network-conformance.yml
+- type: DataModel
+  url: data-model/pipe-network-data-model.yml
+- type: ErrorCatalog
+  url: errors/pipe-network-problem-types.yml
+- type: MCPServer
+  url: mcp/pipe-network-mcp.yml
+- type: LLMsTxt
+  url: llms/pipe-network-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DomainSecurity
+  url: security/pipe-network-domain-security.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1

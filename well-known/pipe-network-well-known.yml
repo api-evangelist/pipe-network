@@ -1,0 +1,24 @@
+generated: '2026-07-20'
+method: probed
+source: live HTTP probes of provider hosts
+summary: >-
+  No real .well-known artifacts found. pipe.network returns 404 for all probed
+  paths. pipenetwork.ai returns HTTP 200 for every path INCLUDING nonsense
+  paths, serving the SPA index.html (text/html) — i.e. a catch-all, not genuine
+  well-known files. None saved (no fabrication).
+probes:
+- host: pipe.network
+  results:
+  - {path: /.well-known/security.txt, status: 404, file: null}
+  - {path: /.well-known/openid-configuration, status: 404, file: null}
+  - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+  - {path: /.well-known/api-catalog, status: 404, file: null}
+  - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+- host: pipenetwork.ai
+  note: SPA catch-all — all paths (incl. random) return 200 text/html; not real artifacts.
+  results:
+  - {path: /.well-known/security.txt, status: 200, real: false, file: null}
+  - {path: /.well-known/openid-configuration, status: 200, real: false, file: null}
+  - {path: /.well-known/oauth-authorization-server, status: 200, real: false, file: null}
+  - {path: /.well-known/api-catalog, status: 200, real: false, file: null}
+  - {path: /.well-known/ai-plugin.json, status: 200, real: false, file: null}

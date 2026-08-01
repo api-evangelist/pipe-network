@@ -1,0 +1,51 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/PipeNetwork/lib-storage
+notes: >-
+  First-party multi-language client SDKs for Pipe Storage ("Pipe Agent SDKs").
+  Shipped in the PipeNetwork/lib-storage monorepo (typescript/, python/, rust/)
+  at version 0.1.0 (Preview). They are NOT yet published to npm / PyPI /
+  crates.io (all three registries return 404 as of this pass) — install from
+  source / the repo. All three expose the same surface (SIWS auth + store/
+  fetch/pin/delete) and ship native agent-framework adapters. x402 agent
+  payment support included.
+packages:
+- name: '@pipe-network/agent-storage'
+  ecosystem: npm
+  language: TypeScript
+  version: 0.1.0
+  official: true
+  published: false
+  registry_status: 'npm 404 (source-only)'
+  source: https://github.com/PipeNetwork/lib-storage/tree/main/typescript
+  client: PipeStorageClient
+- name: pipe-agent-storage
+  ecosystem: PyPI
+  language: Python
+  version: 0.1.0
+  official: true
+  published: false
+  registry_status: 'PyPI 404 (source-only)'
+  source: https://github.com/PipeNetwork/lib-storage/tree/main/python
+  client: PipeStorage
+- name: pipe-agent-storage
+  crate: pipe_agent_storage
+  ecosystem: crates.io
+  language: Rust
+  version: 0.1.0
+  official: true
+  published: false
+  registry_status: 'crates.io not published (source-only)'
+  source: https://github.com/PipeNetwork/lib-storage/tree/main/rust
+  client: PipeStorage
+- name: pipe-cli
+  binary: pipe
+  ecosystem: cargo / github-releases
+  language: Rust
+  official: true
+  published: true
+  install: 'cargo install --path . | prebuilt release binaries (linux/macos/windows amd64+arm64)'
+  source: https://github.com/PipeNetwork/pipe
+  note: >-
+    Command-line client for the Pipe decentralized storage network. Distributed
+    as prebuilt release binaries and via cargo. See cli/ for the command surface.

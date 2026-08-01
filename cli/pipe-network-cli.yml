@@ -1,0 +1,63 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/PipeNetwork/pipe
+name: pipe-cli
+binary: pipe
+language: Rust
+official: true
+description: >-
+  First-party command-line client for the Pipe decentralized storage network.
+  Content-addressed (Blake3) uploads/downloads, client-side AES-256-GCM and
+  post-quantum (Kyber-1024 / Dilithium5) encryption, directory sync, tiered
+  uploads, and prepaid-USDC credit management via Solana Pay.
+install:
+  script: 'bash <(curl -sSL https://raw.githubusercontent.com/pipenetwork/pipe/main/setup.sh)'
+  cargo: 'cargo install --path .'
+  binaries:
+  - pipe-linux-amd64
+  - pipe-linux-arm64
+  - pipe-macos-amd64
+  - pipe-macos-arm64
+  - pipe-windows-amd64.exe
+  releases: https://github.com/PipeNetwork/pipe/releases/latest
+config_file: ~/.pipe-cli.json
+command_groups:
+- group: Account
+  commands:
+  - new-user
+  - config set-api <url>
+  - rotate-app-key
+- group: Files
+  commands:
+  - upload-file <path> <name> [--tier] [--encrypt] [--dry-run] [--skip-uploaded]
+  - download-file <name> <out> [--decrypt] [--legacy]
+  - list-uploads
+  - file-info <name>
+- group: Directories
+  commands:
+  - upload-directory <path> [--tier] [--encrypt] [--skip-uploaded]
+  - download-directory <remote> <local> [--parallel N]
+  - sync <src> <dst>
+- group: Encryption / Keys
+  commands:
+  - encrypt-local <in> <out>
+  - decrypt-local <in> <out>
+  - keygen --name <n> --algorithm <aes256|kyber1024|dilithium5>
+- group: Credits / Payments (prepaid USDC)
+  commands:
+  - credits-status
+  - estimate-cost <file> [--tier]
+  - topup <amount>
+  - credits-submit <intent_id> <tx_sig>
+  - check-token
+key_flows:
+- 'Bootstrap: pipe new-user -> credentials written to ~/.pipe-cli.json'
+- 'Upload: pipe estimate-cost file --tier premium -> pipe upload-file file name --tier premium'
+- 'Fund: pipe topup 10 (Solana Pay link) -> pipe credits-submit <intent> <tx>'
+- 'Encrypted store: pipe upload-file secret.pdf doc --encrypt -> pipe download-file doc out.pdf --decrypt'
+tiers:
+- Normal
+- Priority
+- Premium
+- Ultra
+- Enterprise

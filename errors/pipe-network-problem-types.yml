@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  https://github.com/PipeNetwork/lib-storage ;
+  https://github.com/PipeNetwork/docs/blob/main/docs/cdn-api/api-documentation.md
+format: ad-hoc
+note: >-
+  Pipe does not publish a structured (RFC 9457 problem+json) error catalog. The
+  entries below are DERIVED from documented auth/behavioral contracts in the SDK
+  and CDN API docs. Titles/remediation are inferred, not verbatim from an error
+  reference page.
+problems:
+- status: 401
+  title: Unauthorized / expired token
+  detail: >-
+    Missing or expired JWT access token, or invalid user_app_key. SDKs auto-
+    refresh once (when a refresh token exists) and retry; a persistent 401
+    requires re-running the SIWS flow (auth_challenge -> auth_verify).
+  remediation: Re-authenticate via SIWS or supply a valid user_app_key.
+- status: 400
+  title: Bad request
+  detail: Missing required parameter (user_id, user_app_key, file_name) or malformed body.
+  remediation: Supply all required query parameters / body fields.
+- status: 402
+  title: Payment required (insufficient credits)
+  detail: >-
+    Prepaid USDC credit balance too low for the requested tier/operation
+    (x402-style settlement).
+  remediation: 'Top up: pipe topup <amount> then credits-submit <intent> <tx>.'
+- status: 404
+  title: Object not found
+  detail: No object matches the given file name, hash, or operation id.
+  remediation: Verify the key; use list-uploads / file-info to confirm.

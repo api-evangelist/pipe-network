@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/PipeNetwork/lib-storage
+docs: https://github.com/PipeNetwork/docs/blob/main/docs/cdn-api/api-documentation.md
+summary: >-
+  Pipe Storage supports two auth models. The preferred/current model is SIWS
+  (Sign In With Solana): a wallet signs a server challenge and receives short-
+  lived JWT access + refresh tokens used as bearer credentials. A compatibility
+  model uses a provisioned per-user application key (user_app_key) passed with
+  the user_id. There is no OAuth 2.0 / OpenID Connect layer.
+schemes:
+- id: siws-bearer
+  type: http
+  scheme: bearer
+  bearer_format: JWT
+  preferred: true
+  description: >-
+    Sign In With Solana. Flow: auth_challenge(wallet_pubkey) -> sign returned
+    message -> auth_verify(pubkey, nonce, message, signature_b64) -> JWT access
+    + refresh tokens. SDKs auto-refresh on 401 and retry. auth_refresh() renews;
+    auth_logout() invalidates the session.
+  endpoints:
+    challenge: POST /auth/challenge
+    verify: POST /auth/verify
+    refresh: POST /auth/refresh
+    logout: POST /auth/logout
+    identity: GET /user/me
+- id: user-app-key
+  type: apiKey
+  in: query
+  preferred: false
+  description: >-
+    Provisioned application-key mode (legacy / compatibility). Every
+    authenticated CDN endpoint takes user_id + user_app_key. Obtained via
+    /createUser and rotated via /rotateAppKey. SDK env: PIPE_API_KEY (holds a
+    user_app_key or a JWT access token) + PIPE_ACCOUNT.
+  parameters:
+  - user_id
+  - user_app_key
+env_vars:
+- PIPE_API_KEY   # user_app_key or JWT access token
+- PIPE_ACCOUNT   # account id for deterministic URL generation
+- PIPE_BASE_URL  # default https://us-west-01-firestarter.pipenetwork.com
+payments:
+  standard: x402
+  note: SDKs include x402 agent-payment support for machine-to-machine settlement.

@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: generated
+source: https://github.com/PipeNetwork/lib-storage
+api: Pipe Storage (Firestarter)
+note: >-
+  Agent Skills generated from the real, shared Pipe Storage SDK operation
+  contract (auth_challenge/verify, store/fetch/pin/delete). No provider-
+  published AGENTS.md/skills were found; these are pipeline-generated but
+  grounded in verbatim SDK method names.
+skills:
+- id: pipe-network-store-and-share
+  file: pipe-network-store-and-share.md
+  operations: [auth_challenge, auth_verify, store, pin]
+- id: pipe-network-fetch-object
+  file: pipe-network-fetch-object.md
+  operations: [auth_verify, fetch, delete]
