@@ -77,6 +77,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: License
+  name: MIT
+  url: https://github.com/PipeNetwork/lib-storage/blob/main/LICENSE
 - type: Website
   url: https://pipe.network
 - type: GitHubOrganization
