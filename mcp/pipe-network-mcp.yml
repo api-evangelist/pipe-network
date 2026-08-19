@@ -2,13 +2,11 @@ generated: '2026-07-20'
 method: derived
 source: https://github.com/PipeNetwork/lib-storage
 status: candidate
-summary: >-
-  No official hosted/remote MCP server was found published by Pipe Network as of
-  this pass. Pipe DOES ship native agent-framework tool adapters (OpenAI,
-  Anthropic, LangChain, LlamaIndex, Vercel AI SDK, Cloudflare AI Workflows,
-  AutoGen, CrewAI) in the storage SDKs — see components/. The tool list below is
-  a CANDIDATE MCP surface derived from the real, shared SDK operation contract;
-  it is not a published MCP server.
+summary: No official hosted/remote MCP server was found published by Pipe Network as of this pass. Pipe
+  DOES ship native agent-framework tool adapters (OpenAI, Anthropic, LangChain, LlamaIndex, Vercel AI
+  SDK, Cloudflare AI Workflows, AutoGen, CrewAI) in the storage SDKs — see components/. The tool list
+  below is a CANDIDATE MCP surface derived from the real, shared SDK operation contract; it is not a published
+  MCP server.
 transport: none-published
 tools:
 - name: pipe_auth_challenge
@@ -29,3 +27,9 @@ tools:
 - name: pipe_delete
   description: Remove an object by file name or operation id.
   maps_to: delete
+deployment:
+  mode: none
+  verified: derived
+  tools: 6
+  checked: '2026-08-12'
+  source: catalog MCP census
